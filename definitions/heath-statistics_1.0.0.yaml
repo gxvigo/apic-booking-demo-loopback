@@ -1,0 +1,37 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Heath Statistics
+  x-ibm-name: heath-statistics
+host: $(catalog.host)
+basePath: /
+paths: {}
+securityDefinitions:
+  clientID:
+    description: ''
+    in: header
+    name: X-IBM-Client-Id
+    type: apiKey
+security:
+  - clientID: []
+x-ibm-configuration:
+  assembly:
+    execute:
+      - invoke:
+          target-url: $(target-url)$(request.path)
+          tls-profile: $(invoke-tls-profile)
+  catalogs:
+    medtech:
+      properties:
+        runtime-url: >-
+          https://apiconnect-0abc7480-4e0a-421f-8c7f-be6cbca3f6ab.giovanninzibmcom-acc-dev.apic.au-syd.mybluemix.net
+        invoke-tls-profile: 'client:Loopback-client'
+  properties:
+    runtime-url:
+      value: ''
+      description: ''
+      encoded: false
+    invoke-tls-profile:
+      value: ''
+      description: ''
+      encoded: false

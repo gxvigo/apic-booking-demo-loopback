@@ -1,0 +1,58 @@
+{
+  "name": "office",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "address": {
+      "type": "string",
+      "required": true
+    },
+    "city": {
+      "type": "string",
+      "required": true
+    },
+    "country": {
+      "type": "string",
+      "required": true
+    },
+    "doctor": {
+      "type": "string",
+      "required": true,
+      "description": "ID of the doctor who runs the office"
+    },
+    "id": {
+      "type": "string",
+      "id": true,
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "online_scheduling": {
+      "type": "boolean",
+      "required": true
+    },
+    "online_timeslots": {
+      "type": [
+        "object"
+      ],
+      "required": true
+    },
+    "state": {
+      "type": "string",
+      "required": true
+    },
+    "zip_code": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

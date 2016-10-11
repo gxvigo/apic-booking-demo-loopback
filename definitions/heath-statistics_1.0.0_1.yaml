@@ -1,0 +1,21 @@
+product: 1.0.0
+info:
+  name: heath-statistics
+  title: Heath Statistics
+  version: 1.0.0
+visibility:
+  view:
+    type: public
+  subscribe:
+    type: authenticated
+apis:
+  heath-statistics:
+    $ref: heath-statistics_1.0.0.yaml
+plans:
+  default:
+    title: Default Plan
+    description: Default Plan
+    approval: false
+    rate-limit:
+      value: 100/hour
+      hard-limit: false

@@ -1,0 +1,577 @@
+paths:
+  /appointments:
+    post:
+      tags:
+        - appointment
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: appointment.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/appointment'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/appointment'
+      deprecated: false
+    get:
+      tags:
+        - appointment
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: appointment.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/appointment'
+      deprecated: false
+  '/appointments/{id}/replace':
+    post:
+      tags:
+        - appointment
+      summary: >-
+        Replace attributes for a model instance and persist it into the data
+        source.
+      operationId: appointment.replaceById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/appointment'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/appointment'
+      deprecated: false
+  /appointments/count:
+    get:
+      tags:
+        - appointment
+      summary: Count instances of the model matched by where from the data source.
+      operationId: appointment.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /doctors:
+    post:
+      tags:
+        - doctor
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: doctor.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/doctor'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/doctor'
+      deprecated: false
+    get:
+      tags:
+        - doctor
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: doctor.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/doctor'
+      deprecated: false
+  '/doctors/{id}/replace':
+    post:
+      tags:
+        - doctor
+      summary: >-
+        Replace attributes for a model instance and persist it into the data
+        source.
+      operationId: doctor.replaceById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/doctor'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/doctor'
+      deprecated: false
+  /doctors/count:
+    get:
+      tags:
+        - doctor
+      summary: Count instances of the model matched by where from the data source.
+      operationId: doctor.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /offices:
+    post:
+      tags:
+        - office
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: office.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/office'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/office'
+      deprecated: false
+    get:
+      tags:
+        - office
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: office.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/office'
+      deprecated: false
+  '/offices/{id}/replace':
+    post:
+      tags:
+        - office
+      summary: >-
+        Replace attributes for a model instance and persist it into the data
+        source.
+      operationId: office.replaceById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/office'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/office'
+      deprecated: false
+  /offices/count:
+    get:
+      tags:
+        - office
+      summary: Count instances of the model matched by where from the data source.
+      operationId: office.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+  /patients:
+    post:
+      tags:
+        - patient
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: patient.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/patient'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/patient'
+      deprecated: false
+    get:
+      tags:
+        - patient
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: patient.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/patient'
+      deprecated: false
+  '/patients/{id}/replace':
+    post:
+      tags:
+        - patient
+      summary: >-
+        Replace attributes for a model instance and persist it into the data
+        source.
+      operationId: patient.replaceById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/patient'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/patient'
+      deprecated: false
+  /patients/count:
+    get:
+      tags:
+        - patient
+      summary: Count instances of the model matched by where from the data source.
+      operationId: patient.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
+definitions:
+  appointment:
+    properties:
+      doctor:
+        description: Doctor ID
+        type: string
+      duration:
+        default: 1
+        description: Length in minutes
+        type: number
+        format: double
+      exam_room:
+        description: Exam room ID
+        type: string
+      id:
+        type: string
+      notes:
+        type: string
+      office:
+        description: Office ID
+        type: string
+      patient:
+        description: Patient ID
+        type: string
+      reason:
+        type: string
+      scheduled_time:
+        description: Appointment starting time
+        type: string
+        format: date
+      status:
+        description: >-
+          "", "Arrived", "Cancelled", "Complete", "Confirmed", "In Session", "No
+          Show", "Not Confirmed", or "Rescheduled"
+        type: string
+    required:
+      - doctor
+      - duration
+      - exam_room
+      - id
+      - office
+      - patient
+      - scheduled_time
+    additionalProperties: false
+  x-any:
+    properties: {}
+  doctor:
+    properties:
+      cell_phone:
+        type: string
+      country:
+        type: string
+      email:
+        type: string
+      first_name:
+        type: string
+      id:
+        type: string
+      job_title:
+        type: string
+      last_name:
+        type: string
+      specialty:
+        type: string
+    required:
+      - cell_phone
+      - country
+      - email
+      - first_name
+      - id
+      - job_title
+      - last_name
+      - specialty
+    additionalProperties: false
+  office:
+    properties:
+      address:
+        type: string
+      city:
+        type: string
+      country:
+        type: string
+      doctor:
+        description: ID of the doctor who runs the office
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      online_scheduling:
+        type: boolean
+      online_timeslots:
+        type: array
+        items:
+          type: object
+      state:
+        type: string
+      zip_code:
+        type: string
+    required:
+      - address
+      - city
+      - country
+      - doctor
+      - id
+      - name
+      - online_scheduling
+      - online_timeslots
+      - state
+      - zip_code
+    additionalProperties: false
+  patient:
+    properties:
+      address:
+        type: string
+      cell_phone:
+        type: string
+      city:
+        type: string
+      date_of_birth:
+        type: string
+        format: date
+      doctor:
+        description: ID of the primary doctor
+        type: string
+      email:
+        type: string
+      ethnicity:
+        type: string
+      first_name:
+        type: string
+      gender:
+        type: string
+      home_phone:
+        type: string
+      id:
+        description: ID of the patient
+        type: string
+      last_name:
+        type: string
+      offices:
+        description: IDs of the used offices
+        type: array
+        items:
+          type: string
+      patient_photo:
+        description: Link to picture
+        type: string
+      state:
+        type: string
+      zipcode:
+        type: string
+    required:
+      - cell_phone
+      - city
+      - date_of_birth
+      - doctor
+      - email
+      - ethnicity
+      - first_name
+      - gender
+      - home_phone
+      - id
+      - last_name
+      - offices
+      - patient_photo
+      - state
+      - zipcode
+    additionalProperties: false
+basePath: /api
+swagger: '2.0'
+info:
+  x-ibm-name: booking
+  version: 1.0.1
+  title: booking
+schemes:
+  - https
+host: $(catalog.host)
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  clientIdHeader:
+    type: apiKey
+    in: header
+    name: X-IBM-Client-Id
+security:
+  - clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  catalogs:
+    apic-dev:
+      properties:
+        runtime-url: $(TARGET_URL)
+    sb:
+      properties:
+        runtime-url: 'http://localhost:4001'
+    medtech:
+      properties:
+        runtime-url: >-
+          https://apiconnect-0abc7480-4e0a-421f-8c7f-be6cbca3f6ab.giovanninzibmcom-acc-dev.apic.au-syd.mybluemix.net
+        invoke-tls-profile: 'client:Loopback-client'
+  assembly:
+    execute:
+      - invoke:
+          target-url: $(runtime-url)$(request.path)$(request.search)
+          tls-profile: $(invoke-tls-profile)
+  properties:
+    runtime-url:
+      value: ''
+      description: ''
+      encoded: false
+    invoke-tls-profile:
+      value: ''
+      description: ''
+      encoded: false

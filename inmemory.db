@@ -1,0 +1,17 @@
+{
+  "ids": {
+    "appointment": 1,
+    "doctor": 54.63747335,
+    "office": 1,
+    "patient": 1
+  },
+  "models": {
+    "appointment": {},
+    "doctor": {
+      "52.63747335": "{\"country\":\"Sint Maarten\",\"first_name\":\"Maud\",\"id\":52.63747335,\"last_name\":\"Murray\",\"specialty\":\"jek\",\"cell_phone\":\"(916) 261-9978\",\"email\":\"giwunwul@re.uz\",\"job_title\":97.60572527}",
+      "28.55704343": "{\"country\":\"Singapore\",\"first_name\":\"Jennie\",\"id\":28.55704343,\"last_name\":\"Gibson\",\"specialty\":\"pop\",\"cell_phone\":\"(478) 363-5238\",\"email\":\"rifruh@javuroduh.sm\",\"job_title\":15.61425861}"
+    },
+    "office": {},
+    "patient": {}
+  }
+}

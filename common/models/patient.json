@@ -1,0 +1,85 @@
+{
+  "name": "patient",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "address": {
+      "type": "string",
+      "required": false
+    },
+    "cell_phone": {
+      "type": "string",
+      "required": true
+    },
+    "city": {
+      "type": "string",
+      "required": true
+    },
+    "date_of_birth": {
+      "type": "date",
+      "required": true
+    },
+    "doctor": {
+      "type": "string",
+      "required": true,
+      "description": "ID of the primary doctor"
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "ethnicity": {
+      "type": "string",
+      "required": true
+    },
+    "first_name": {
+      "type": "string",
+      "required": true
+    },
+    "gender": {
+      "type": "string",
+      "required": true
+    },
+    "home_phone": {
+      "type": "string",
+      "required": true
+    },
+    "id": {
+      "type": "string",
+      "id": true,
+      "required": true,
+      "description": "Iof the patient"
+    },
+    "last_name": {
+      "type": "string",
+      "required": true
+    },
+    "offices": {
+      "type": [
+        "string"
+      ],
+      "required": true,
+      "description": "IDs of the used offices"
+    },
+    "patient_photo": {
+      "type": "string",
+      "required": true,
+      "description": "Link to picture"
+    },
+    "state": {
+      "type": "string",
+      "required": true
+    },
+    "zipcode": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

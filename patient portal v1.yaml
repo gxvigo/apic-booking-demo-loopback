@@ -1,0 +1,485 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Patient Portal
+  description: An API for Progenity's patient portal
+  contact:
+    name: Isaac A. Sanch
+    email: isaac.sanch@progenity.com
+host: api.progenity.com
+basePath: /v1
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+security: []
+securityDefinitions:
+  AuthorizationToken:
+    type: apiKey
+    name: Authorization
+    in: header
+paths:
+  /auth/token:
+    post:
+      summary: Verify credentials and retrieve an authorization token
+      description: ...
+      tags:
+        - Authortization
+      security: []
+      responses:
+        '200':
+          description: Normal response
+  /me:
+    get:
+      summary: Retrieve information about the authorized user
+      description: ...
+      tags:
+        - User Information
+      parameters:
+        - $ref: '#/parameters/authParam'
+      security:
+        - AuthorizationToken: []
+      responses:
+        '200':
+          description: Normal response
+          schema:
+            $ref: '#/definitions/user'
+          examples:
+            application/json:
+              email: silicon.suzy@gmail.com
+              forename: Suzy
+              surname: Silicon
+              dob: '1984-03-02'
+              phone: 510.888.3990
+              address:
+                line_1: 1643 Pleasant Ave
+                line_2: ''
+                city: Mountain View
+                state_abbr: CA
+                postal_code: '94818'
+              _links:
+                - href: 'https://api.progenity.com/v1/me'
+                  ref: self
+                - href: >-
+                    https://api.progenity.com/v1/contacts/4700677344924c378671a178cd0d7fc2
+                  ref: physician
+                - href: >-
+                    https://api.progenity.com/v1/contacts/deb6ea298345459e9d7c111aac76ffea
+                  ref: genetic_councilor
+        '401':
+          description: Unauthorized
+    patch:
+      summary: Update information about the authorized user
+      description: ...
+      tags:
+        - User Information
+      parameters:
+        - $ref: '#/parameters/authParam'
+      security:
+        - AuthorizationToken: []
+      responses:
+        '200':
+          description: Normal response
+        '401':
+          description: Unauthorized
+  /users:
+    get:
+      summary: Retrieve all users (by auth)
+      description: ...
+      tags:
+        - User Information
+      parameters:
+        - $ref: '#/parameters/authParam'
+      security:
+        - AuthorizationToken: []
+      responses:
+        '200':
+          description: Normal response
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  '/users/{uuid}':
+    get:
+      summary: Retrieve a user
+      description: ...
+      tags:
+        - User Information
+      parameters:
+        - $ref: '#/parameters/authParam'
+        - $ref: '#/parameters/uuid'
+      security:
+        - AuthorizationToken: []
+      responses:
+        '200':
+          description: Normal response
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /results:
+    get:
+      summary: Retrieve all results (by auth)
+      description: ...
+      tags:
+        - Result Information
+      parameters:
+        - $ref: '#/parameters/authParam'
+        - $ref: '#/parameters/expandData'
+      security:
+        - AuthorizationToken: []
+      responses:
+        '200':
+          description: Normal response
+          schema:
+            $ref: '#/definitions/result_set'
+          examples:
+            application/json:
+              results: >-
+                [...] if 'expand' parameter includes 'results', will be an array
+                of result objects
+              _links:
+                - href: 'https://api.progenity.com/v1/results'
+                  ref: self
+                - href: >-
+                    https://api.progenity.com/v1/results/f7e39f867743448daf1449104cbff81e
+                  ref: result
+                - href: >-
+                    https://api.progenity.com/v1/results/e8c5abb6318146748c7a2f2a74805e46
+                  ref: result
+                - href: >-
+                    https://api.progenity.com/v1/results/fb91b86c65d445319279cca3e97d276d
+                  ref: result
+        '401':
+          description: Unauthorized
+  '/results/{uuid}':
+    get:
+      summary: Retrieve a single result
+      description: ...
+      tags:
+        - Result Information
+      parameters:
+        - $ref: '#/parameters/authParam'
+        - $ref: '#/parameters/uuid'
+      security:
+        - AuthorizationToken: []
+      responses:
+        '200':
+          description: Normal response
+          schema:
+            $ref: '#/definitions/result'
+          examples:
+            application/json:
+              status: Risk Identified
+              text: >-
+                Your test result indicates you are a carrier of cystic fibrosis.
+                This means you have a higher chance of having a child who is
+                infected with cystic fibrosis.
+              opt_in: false
+              _links:
+                - href: >-
+                    https://api.progenity.com/v1/results/f7e39f867743448daf1449104cbff81e
+                  ref: self
+                - href: >-
+                    https://api.progenity.com/v1/users/d5076aa7da484daaa7b5cf1a0ebc19ee
+                  ref: user
+                - href: >-
+                    https://api.progenity.com/v1/users/744515cf68174b128bc4266e0d7b7760
+                  ref: shared_with
+                - href: 'https://api.progenity.com/v1/test_types/1'
+                  ref: test
+                - href: >-
+                    https://api.progenity.com/v1/contacts/4700677344924c378671a178cd0d7fc2
+                  ref: physician
+                - href: >-
+                    https://api.progenity.com/v1/contacts/4700677344924c378671a178cd0d7fc2
+                  ref: genetic_councilor
+                - href: >-
+                    https://files.progenity.com/results/158/cystic-fibrosis-192.pdf
+                  ref: download
+                - href: >-
+                    https://media.progenity.com/cystic-fibrosis-cf/next-steps/positive/cystic-fibrosis.mpg4
+                  ref: video
+                - href: >-
+                    https://www.progenity.com/cystic-fibrosis-cf/next-steps/positive
+                  ref: next_steps
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /orders:
+    get:
+      summary: Retrieve all orders (by auth)
+      description: ...
+      tags:
+        - Order Information
+      parameters:
+        - $ref: '#/parameters/authParam'
+        - $ref: '#/parameters/expandData'
+      security:
+        - AuthorizationToken: []
+      responses:
+        '200':
+          description: Normal response
+          schema:
+            $ref: '#/definitions/order_set'
+          examples:
+            application/json:
+              orders: >-
+                [...] if 'expand' parameter includes 'orders', will be an array
+                of order objects
+              _links:
+                - href: 'https://api.progenity.com/v1/orders'
+                  ref: self
+                - href: >-
+                    https://api.progenity.com/v1/orders/234eff88e08e4d0a81bf923269aca4a7
+                  ref: order
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  '/orders/{uuid}':
+    get:
+      summary: Retrieve an order
+      description: ...
+      tags:
+        - Order Information
+      parameters:
+        - $ref: '#/parameters/authParam'
+        - $ref: '#/parameters/uuid'
+        - $ref: '#/parameters/expandData'
+      security:
+        - AuthorizationToken: []
+      responses:
+        '200':
+          description: Normal response
+          schema:
+            $ref: '#/definitions/order'
+          examples:
+            application/json:
+              made_date: '2015-09-15T18:24:53Z'
+              fulfilled_date: '2015-09-30T15:03:53Z'
+              results: >-
+                [...] if 'expand' parameter includes 'results', will be an array
+                of result objects
+              _links:
+                - href: >-
+                    https://api.progenity.com/v1/orders/234eff88e08e4d0a81bf923269aca4a7
+                  ref: self
+                - href: >-
+                    https://api.progenity.com/v1/results/f7e39f867743448daf1449104cbff81e
+                  ref: result
+                - href: 'https://api.progenity.com/v1/test_types/1'
+                  ref: test
+                - href: 'https://api.progenity.com/v1/test_types/2'
+                  ref: test
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /contacts:
+    get:
+      summary: Retrieve all contacts (by auth)
+      description: ...
+      tags:
+        - Miscellaneous
+      parameters:
+        - $ref: '#/parameters/authParam'
+      security:
+        - AuthorizationToken: []
+      responses:
+        '200':
+          description: Normal response
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  '/contacts/{uuid}':
+    get:
+      summary: Retrieve a contact
+      description: ...
+      tags:
+        - Miscellaneous
+      parameters:
+        - $ref: '#/parameters/authParam'
+        - $ref: '#/parameters/uuid'
+      security:
+        - AuthorizationToken: []
+      responses:
+        '200':
+          description: Normal response
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /test_types:
+    get:
+      summary: Retrieve the types of tests performed
+      description: ...
+      tags:
+        - Miscellaneous
+      parameters:
+        - $ref: '#/parameters/authParam'
+      security:
+        - AuthorizationToken: []
+      responses:
+        '200':
+          description: Normal response
+          schema:
+            $ref: '#/definitions/test_set'
+          examples:
+            application/json:
+              items:
+                - name: Ovarians Assessment Report
+                  description: >-
+                    The Ovarian Assessment Report (OAR™) from ReproSource® is a
+                    test designed to predict your remaining egg supply.
+                    Understanding your egg supply can help you make an informed
+                    decision about the best time to plan for pregnancy and
+                    whether to explore other reproductive options.
+                  _links:
+                    - href: 'https://api.progenity.com/v1/test_types/1'
+                      ref: self
+                    - href: 'https://progenity.com/ovarian-assessment-report-0'
+                      ref: more_info
+                - name: Cystic Fibrosis
+                  description: ...
+                  _links:
+                    - href: 'https://api.progenity.com/v1/test_types/2'
+                      ref: self
+                    - href: 'https://progenity.com/cystic-fibrosis-cf'
+                      ref: more_info
+              _links:
+                - href: 'https://api.progenity.com/v1/test_types'
+                  ref: self
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+parameters:
+  authParam:
+    name: Authorization
+    in: header
+    description: Authorization Token
+    required: true
+    type: string
+    default: 'Bearer {token}'
+  expandData:
+    name: expand
+    in: query
+    description: Expand links of specified types to objects in the return type
+    required: false
+    type: string
+    collectionFormat: csv
+    default: CSV list of links to expand
+  uuid:
+    name: uuid
+    in: path
+    description: Identifier for the resource
+    required: true
+    type: string
+    format: uuid
+    default: '--'
+definitions:
+  user:
+    description: ''
+    properties:
+      email:
+        type: string
+      forename:
+        type: string
+      surname:
+        type: string
+      dob:
+        type: string
+      address:
+        $ref: '#/definitions/address'
+      _links:
+        $ref: '#/definitions/resource_set'
+  address:
+    description: ''
+    properties:
+      line_1:
+        type: string
+      line_2:
+        type: string
+      city:
+        type: string
+      state_abbr:
+        type: string
+      postal_code:
+        type: string
+  result_set:
+    description: ''
+    properties:
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/result'
+      _links:
+        $ref: '#/definitions/resource_set'
+  result:
+    description: ''
+    properties:
+      status:
+        type: string
+      text:
+        type: string
+      opt_in:
+        type: boolean
+      _links:
+        $ref: '#/definitions/resource_set'
+  order_set:
+    description: ''
+    properties:
+      orders:
+        type: array
+        items:
+          $ref: '#/definitions/order'
+      _links:
+        $ref: '#/definitions/resource_set'
+  order:
+    description: ''
+    properties:
+      made_date:
+        type: string
+        format: date-time
+      fulfilled_date:
+        type: string
+        format: date-time
+      results:
+        type: array
+        items:
+          $ref: '#/definitions/result'
+      _links:
+        $ref: '#/definitions/resource_set'
+  test_set:
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/test'
+      _links:
+        $ref: '#/definitions/resource_set'
+  test:
+    description: ''
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      _links:
+        $ref: '#/definitions/resource_set'
+  resource_set:
+    type: array
+    items:
+      $ref: '#/definitions/resource'
+  resource:
+    description: ''
+    properties:
+      href:
+        type: string
+      rel:
+        type: string

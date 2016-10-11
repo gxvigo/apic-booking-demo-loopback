@@ -1,0 +1,43 @@
+product: 1.0.0
+info:
+  name: booking
+  title: booking
+  version: 1.0.1
+  contact:
+    name: Giovanni Vigorelli
+    email: giovanni@nz.ibm.com
+  termsOfService: >-
+    Thank you for using our APIs, other developer services, and associated
+    software (collectively, "APIs"). By accessing or using our APIs, you are
+    agreeing to the terms below. If there is a conflict between these terms and
+    additional terms applicable to a given API, the additional terms will
+    control for that conflict. Collectively, we refer to the terms below, any
+    additional terms, terms within the accompanying API documentation, and any
+    applicable policies and guidelines as the "Terms." You agree to comply with
+    the Terms and that the Terms control your relationship with us. So please
+    read all the Terms carefully. If you use the APIs as an interface to, or in
+    conjunction with other products or services, then the terms for those other
+    products or services also apply.
+  license:
+    name: T&C
+apis:
+  booking:
+    $ref: booking.yaml
+visibility:
+  view:
+    type: public
+  subscribe:
+    type: authenticated
+plans:
+  enterprise:
+    title: enterprise
+    apis: {}
+    description: Unlimited API calls for enterprise customer. Monthly subscription
+  essential:
+    title: essential
+    apis: {}
+    rate-limits:
+      rate-limit-1:
+        value: 5/minute
+        hard-limit: true
+    description: Limited API calls for generic consumers

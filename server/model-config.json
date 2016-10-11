@@ -1,0 +1,32 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "appointment": {
+    "dataSource": "cloudant_on_bluemix",
+    "public": true
+  },
+  "doctor": {
+    "dataSource": "cloudant_on_bluemix",
+    "public": true
+  },
+  "office": {
+    "dataSource": "cloudant_on_bluemix",
+    "public": true
+  },
+  "patient": {
+    "dataSource": "cloudant_on_bluemix",
+    "public": true
+  }
+}

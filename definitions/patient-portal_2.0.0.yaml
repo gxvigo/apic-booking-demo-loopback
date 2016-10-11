@@ -1,0 +1,22 @@
+product: 1.0.0
+info:
+  name: patient-portal
+  title: Patient Portal
+  version: 2.0.0
+visibility:
+  view:
+    type: public
+  subscribe:
+    type: authenticated
+plans:
+  default:
+    title: Default Plan
+    description: Default Plan
+    approval: false
+    rate-limits:
+      per-minute:
+        value: 100/minute
+        hard-limit: false
+apis:
+  Patient Portal:
+    $ref: ../patient portal v1.yaml

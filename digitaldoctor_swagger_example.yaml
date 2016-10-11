@@ -1,0 +1,495 @@
+swagger: '2.0'
+info:
+  version: '0.1'
+  title: Digital Doctor
+  description: API proposal for DKV - Mi Salud Al Dia to provide to Digital Doctor.
+host: digital-doctor.herokuapp.com
+basePath: /
+schemes:
+  - https
+securityDefinitions:
+  basicAuth:
+    type: basic
+    description: 'HTTP Basic Authentication, with secure channel over TLS 1.2.'
+    x-ibm-authentication-registry: histrempurendeetyarsedar
+  JWT:
+    type: apiKey
+    description: Json Web Token
+    name: Authentication
+    in: header
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users/login:
+    post:
+      description: >-
+        Checks whether the user credentials provided are correct and, returns
+        all the data related with user.
+      operationId: login
+      tags:
+        - Login
+      parameters:
+        - name: login
+          in: body
+          description: >-
+            User object containing the credentials to be checked by MSAD. userId
+            and password fields must be set.
+          required: true
+          schema:
+            $ref: '#/definitions/Login'
+      responses:
+        '200':
+          description: User credentials are correct.
+          schema:
+            $ref: '#/definitions/User'
+          headers:
+            Authorization:
+              type: string
+              description: JWT Token that must be propagated in following requests
+        '403':
+          description: Incorrect user credentials.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /users:
+    post:
+      description: >-
+        Creates a new user for Digital Doctor; DKV corporate systems store that
+        new user.
+      operationId: addUser
+      tags:
+        - User Management
+      security:
+        - basicAuth: []
+        - JWT: []
+      parameters:
+        - name: user
+          in: body
+          description: >-
+            User object with all the Digital Doctor user data. User profiles
+            won't be editted.
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '201':
+          description: >-
+            The user has been created. 'conditionsAccepted' parameter must be
+            'true'.
+          schema:
+            $ref: '#/definitions/User'
+        '400':
+          description: User cannot be created.
+          schema:
+            $ref: '#/definitions/Error'
+        '409':
+          description: User already exists.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/users/{id}':
+    put:
+      description: Edit a user identified by ID
+      operationId: editUser
+      tags:
+        - User Management
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: ID of user to edit
+          required: true
+          type: integer
+          format: int64
+        - name: user
+          in: body
+          description: User to be edited. User profiles won't be editted.
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: user response
+          schema:
+            $ref: '#/definitions/User'
+        '404':
+          description: user not found
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /users/recovery:
+    post:
+      description: Starts the password recovery process
+      operationId: passwordRecovery
+      tags:
+        - Login
+      parameters:
+        - name: user
+          in: body
+          description: >-
+            The user which password recovery process is started for. UserId and
+            insuranceNumber are required.
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: >-
+            Password recovery process successfully started. The response is the
+            same user object received.
+          schema:
+            $ref: '#/definitions/User'
+        '404':
+          description: User not found.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /terms:
+    get:
+      description: >-
+        Gets the Terms and Conditions, allowing Digital Doctor to show the most
+        recent available version of this legal text.
+      operationId: getTermsAndConditions
+      tags:
+        - Login
+      security:
+        - basicAuth: []
+      parameters:
+        - name: Accept-Language
+          in: header
+          description: >-
+            The language to provide the Terms & Conditions text. If it is
+            absent, English is expected to be the default language.
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Terms & Conditions text.
+          schema:
+            $ref: '#/definitions/Terms'
+        '404':
+          description: Terms & Conditions text not found in the specified language.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/users/{userId}/profiles/{profileId}/phrItems':
+    get:
+      description: 'Gets the Personal Health Record items for a given userId and profileId,'
+      operationId: getPhrItems
+      tags:
+        - PHR
+      security:
+        - basicAuth: []
+      parameters:
+        - name: userId
+          in: path
+          description: ID of user to query phr
+          required: true
+          type: integer
+          format: int64
+        - name: profileId
+          in: path
+          description: ID of profile to query phr
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Phr Item list
+          schema:
+            title: PhrItems
+            type: array
+            items:
+              $ref: '#/definitions/PhrItem'
+        '404':
+          description: Profile and userId not found.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      description: 'Edits a Personal Health Record item for a given userId and profileId,'
+      operationId: editPhrItem
+      tags:
+        - PHR
+      security:
+        - basicAuth: []
+      parameters:
+        - name: userId
+          in: path
+          description: ID of user to query phr
+          required: true
+          type: integer
+          format: int64
+        - name: profileId
+          in: path
+          description: ID of profile to query phr
+          required: true
+          type: integer
+          format: int64
+        - name: phrItem
+          in: body
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PhrItem'
+      responses:
+        '200':
+          description: Modified Phr Items
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PhrItem'
+        '404':
+          description: Profile and userId not found.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/users/{userId}/profiles/{profileId}/files':
+    get:
+      description: Gets the file list for a given userId and profileId.
+      operationId: getFiles
+      tags:
+        - Files
+      security:
+        - basicAuth: []
+      parameters:
+        - name: userId
+          in: path
+          description: ID of user to add file
+          required: true
+          type: integer
+          format: int64
+        - name: profileId
+          in: path
+          description: ID of profile to add file
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: File list
+          schema:
+            title: Files
+            type: array
+            items:
+              $ref: '#/definitions/FileItem'
+        '404':
+          description: Profile and userId not found.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      description: 'Adds a file to a given userId and profileId,'
+      operationId: addFile
+      tags:
+        - Files
+      security:
+        - basicAuth: []
+      parameters:
+        - name: userId
+          in: path
+          description: ID of user to add file
+          required: true
+          type: integer
+          format: int64
+        - name: profileId
+          in: path
+          description: ID of profile to add file
+          required: true
+          type: integer
+          format: int64
+        - name: file
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/FileItem'
+      responses:
+        '201':
+          description: File added
+          schema:
+            $ref: '#/definitions/FileItem'
+        '404':
+          description: Profile and userId not found.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  '/users/{userId}/profiles/{profileId}/files/{id}':
+    delete:
+      description: 'Logically deletes a file to a given userId and profileId,'
+      operationId: deleteFiles
+      tags:
+        - Files
+      security:
+        - basicAuth: []
+      parameters:
+        - name: userId
+          in: path
+          description: ID of user to delete file
+          required: true
+          type: integer
+          format: int64
+        - name: profileId
+          in: path
+          description: ID of profile to delete file
+          required: true
+          type: integer
+          format: int64
+        - name: id
+          in: path
+          description: ID of file to delete
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: File added
+          schema:
+            $ref: '#/definitions/FileItem'
+        '404':
+          description: Profile and userId not found.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Error:
+    required:
+      - code
+      - title
+      - detail
+      - href
+    properties:
+      code:
+        type: integer
+        format: int32
+      title:
+        type: string
+      detail:
+        type: string
+      href:
+        type: string
+  Login:
+    required:
+      - userId
+      - password
+    properties:
+      userId:
+        type: string
+      password:
+        type: string
+        format: password
+  User:
+    required:
+      - userId
+    properties:
+      id:
+        type: integer
+        format: int64
+      userId:
+        type: string
+      password:
+        type: string
+        format: password
+      insuranceNumber:
+        type: string
+      birthDate:
+        type: string
+        format: date
+      email:
+        type: string
+        format: email
+      conditionVersionAccepted:
+        type: string
+      profiles:
+        type: array
+        items:
+          $ref: '#/definitions/Profile'
+  Profile:
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+      birthDate:
+        type: string
+        format: date
+      sex:
+        type: string
+      relationship:
+        type: string
+  Terms:
+    required:
+      - version
+      - url
+    properties:
+      version:
+        type: integer
+        format: int32
+      url:
+        type: string
+  FileItem:
+    required:
+      - id
+      - type
+      - date
+    properties:
+      id:
+        type: integer
+        format: int64
+      type:
+        type: string
+      metadata:
+        type: object
+        additionalProperties:
+          type: string
+      data:
+        type: string
+        format: byte
+      date:
+        type: string
+        format: date
+  PhrItem:
+    required:
+      - id
+    properties:
+      id:
+        type: integer
+        format: int64
+      value:
+        type: string

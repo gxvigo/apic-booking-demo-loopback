@@ -1,0 +1,16 @@
+{
+  "inmemory": {
+    "name": "inmemory",
+    "localStorage": "",
+    "file": "./inmemory.db",
+    "connector": "memory"
+  },
+  "cloudant_on_bluemix": {
+    "url": "https://a09b66ac-86cc-4654-89df-b92c9b0e2ce2-bluemix:1820b300b0af57b93111042255e8293523cdb2e9158221d0403e6e20d5d1edaa@a09b66ac-86cc-4654-89df-b92c9b0e2ce2-bluemix.cloudant.com/",
+    "database": "booking",
+    "username": "histrempurendeetyarsedar",
+    "password": "5dc5c0fd626a07fd9f2149a4792355fea5634c5b",
+    "name": "cloudant_on_bluemix",
+    "connector": "cloudant"
+  }
+}

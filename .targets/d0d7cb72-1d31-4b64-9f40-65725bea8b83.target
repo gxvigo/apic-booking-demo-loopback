@@ -1,0 +1,93 @@
+type: bluemix
+server:
+  displayName: Sydney
+  name: au-syd
+  host: au.apiconnect.ibmcloud.com
+org:
+  url: 'https://au.apiconnect.ibmcloud.com/v1/orgs/577b46dc0cf28110025dc3c2'
+  id: 577b46dc0cf28110025dc3c2
+  name: giovanninzibmcom-acc-dev
+  status: active
+  orgType: apiProvider
+  displayName: giovanni@nz.ibm.com (acc-dev)
+  externalOrgId: cbbe1d7a-4a18-4085-a903-55cde3f1f7ba
+  externalInviteOverride: 'https://new-console.au-syd.bluemix.net/apis/catalog/invitation'
+  externalSpaceId: cbbe1d7a-4a18-4085-a903-55cde3f1f7ba
+  externalNativeOrgId: f9b853ea-4ee3-48b8-a8db-dc8552ed1bd9
+  advPortalOverride: true
+  extUaaAuthenticated: false
+  requiresSSLClientCertCheck: false
+catalog:
+  id: 57d8c9cd0cf229b929c3f724
+  shortName: medtech
+  name: MedTech
+  sandbox: true
+app:
+  metadata:
+    guid: 0abc7480-4e0a-421f-8c7f-be6cbca3f6ab
+  entity:
+    guid: 0abc7480-4e0a-421f-8c7f-be6cbca3f6ab
+    name: booking
+    routes:
+      - guid: 75d83932-d9c1-4224-8193-ae6d2f818a82
+        host: apiconnect-0abc7480-4e0a-421f-8c7f-be6cbca3f6ab
+        port: null
+        path: ''
+        domain:
+          guid: 37794cde-24a3-4a22-89aa-bde8c921ac1a
+          name: giovanninzibmcom-acc-dev.apic.au-syd.mybluemix.net
+    running_instances: 0
+    services: []
+    available_domains:
+      - guid: c7acae56-93f0-4153-b28e-c0b95a60b4b0
+        name: giovanninzibmcom-dev.apic.au-syd.mybluemix.net
+        owning_organization_guid: f9b853ea-4ee3-48b8-a8db-dc8552ed1bd9
+      - guid: 37794cde-24a3-4a22-89aa-bde8c921ac1a
+        name: giovanninzibmcom-acc-dev.apic.au-syd.mybluemix.net
+        owning_organization_guid: f9b853ea-4ee3-48b8-a8db-dc8552ed1bd9
+      - guid: 76f331d2-93e5-4472-ae1b-26bae85d381a
+        name: au-syd.mybluemix.net
+        router_group_guid: null
+        router_group_type: null
+    production: false
+    space_guid: cbbe1d7a-4a18-4085-a903-55cde3f1f7ba
+    stack_guid: 1dc6e02f-0d02-4c0f-a176-bfc6ea23fca1
+    buildpack: null
+    detected_buildpack: 'SDK for Node.js(TM) (ibm-node.js-4.5.0, buildpack-v3.7-20160826-1101)'
+    environment_json: {}
+    memory: 256
+    instances: 1
+    disk_quota: 1024
+    state: STOPPED
+    version: b528d8ac-94f3-4399-a467-658d7e86bd40
+    command: null
+    console: true
+    debug: null
+    staging_task_id: 44e496f6e1cf4c94b68c644caadfb06c
+    package_state: STAGED
+    health_check_type: port
+    health_check_timeout: null
+    staging_failed_reason: null
+    staging_failed_description: null
+    diego: false
+    docker_image: null
+    package_updated_at: '2016-09-20T23:28:21Z'
+    detected_start_command: ./vendor/initial_startup.rb
+    enable_ssh: true
+    docker_credentials_json:
+      redacted_message: '[PRIVATE DATA HIDDEN]'
+    ports: null
+id: d0d7cb72-1d31-4b64-9f40-65725bea8b83
+target: 1.0.0
+versionOptions:
+  inplaceUpdate: true
+publishApp: true
+publishProducts: true
+specificProducts: true
+workspaceDir:
+  name: booking
+  path: /Users/giovanni/opt/workspaces/apic/booking
+  id: 11
+  displayName: booking
+  type: project
+  projectType: loopback

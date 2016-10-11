@@ -1,0 +1,64 @@
+{
+  "name": "appointment",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "doctor": {
+      "type": "string",
+      "required": true,
+      "description": "Doctor ID",
+      "default": 1
+    },
+    "duration": {
+      "type": "number",
+      "required": true,
+      "description": "Length in minutes",
+      "default": 1
+    },
+    "exam_room": {
+      "type": "string",
+      "required": true,
+      "description": "Exam room ID"
+    },
+    "id": {
+      "type": "string",
+      "id": true,
+      "required": true
+    },
+    "notes": {
+      "type": "string",
+      "required": false
+    },
+    "office": {
+      "type": "string",
+      "required": true,
+      "description": "Office ID"
+    },
+    "patient": {
+      "type": "string",
+      "required": true,
+      "description": "Patient ID"
+    },
+    "reason": {
+      "type": "string",
+      "required": false
+    },
+    "scheduled_time": {
+      "type": "date",
+      "required": true,
+      "description": "Appointment starting time"
+    },
+    "status": {
+      "type": "string",
+      "required": false,
+      "description": "\"\", \"Arrived\", \"Cancelled\", \"Complete\", \"Confirmed\", \"In Session\", \"No Show\", \"Not Confirmed\", or \"Rescheduled\""
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
